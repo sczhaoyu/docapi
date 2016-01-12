@@ -4,9 +4,9 @@ var Link =[
     {name:"新建文档",idx:1},
     {name:"数据类型",idx:2},
     {name:"错误代码",idx:3},
-    {name:"更新备注",idx:4},
+    {name:"更新日志",idx:4},
     {name:"文档说明",idx:5},
-    {name:"新建目录",idx:6},
+    {name:"版本管理",idx:7}
 
 ]
 var Header = React.createClass({
