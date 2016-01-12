@@ -48,7 +48,7 @@ var App = React.createClass({
       return (	
 			<div className="container-fluid">
 				<Header OnSetRouterIdx={this.onSetRouterIdx}/>
-				<div className="row" style={{marginTop:53}}>
+				<div className="row" style={{marginTop:60}}>
 					 {plug}
 				</div>
 				
