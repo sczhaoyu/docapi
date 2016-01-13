@@ -55,7 +55,7 @@ var  DiaLog = React.createClass({
 			   	    {this.getTitle()}
 			   		<div className="layui-layer-content">
 			   			<div style={{padding:20}}>
-			   			  {this.props.div()}
+			   			  {this.props.div}
 			   			</div>
 			   	    </div>
 			   	<span className="layui-layer-setwin">

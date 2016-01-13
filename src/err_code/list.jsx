@@ -3,17 +3,24 @@ var errCodes=[
 	{code:"100",txt:"token失效"}
 ];
 var  Code = React.createClass({
+	deleteErrCode:function(eid){
+       this.props.deleteErrCode(eid);
+	},
+	updateErrCode:function(e){
+		this.props.updateErrCode(e);
+	},
 	renderErrCodes:function(){
 		var ret =[];
-		for(var i=0;i<errCodes.length;i++){
+		for(var i=0;i<this.props.errCodes.length;i++){
+			var c=this.props.errCodes[i];
 			ret.push(
-			  <tr>
-	            <td className="col-md-2">{errCodes[i].code}</td>
-	            <td>{errCodes[i].txt}</td>
+			  <tr key={c.errCodeid}>
+	            <td className="col-md-2">{c.code}</td>
+	            <td>{c.descriptionText}</td>
 	            <td className="col-md-2">
 	            	<div className="btn-group btn-group-sm" role="group" aria-label="Small button group">
-				      <button type="button" className="btn btn-default">修改</button>
-				      <button type="button" className="btn btn-default">删除</button>
+				      <button type="button" onClick={this.updateErrCode.bind(this,c)} className="btn btn-default">修改</button>
+				      <button type="button" onClick={this.deleteErrCode.bind(this,c.errCodeid)} className="btn btn-default">删除</button>
 				    </div>
 	            </td>
 	          </tr>
