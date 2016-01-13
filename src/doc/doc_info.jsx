@@ -5,6 +5,7 @@ var Parameters=require('./parameters.jsx');
 var DocInfo = React.createClass({
 		getInitialState:function () {
 			return {
+				updateDocId:0,//修改的ID
 				parameters:[],
 			}
 		},
@@ -31,6 +32,9 @@ var DocInfo = React.createClass({
 				</pre>
 			);
 		},
+		onUpdateDoc:function(docId){
+			this.props.onUpdateDoc(docId)
+		},
 		render:function(){
         if (this.props.doc==null) {
         	return(
@@ -40,15 +44,14 @@ var DocInfo = React.createClass({
 					  </div>
 					</div>
         		);
-        };
-		     	
+        }; 	
         return(
         	<div>
         		   
         		    <div className="panel panel-default">
 						  <div className="panel-heading" style={{lineHeight:"30px",height:48,backgroundImage:"none",padding:"8px 10px"}}>
 						  	<span>{this.props.doc.name+"("+this.props.doc.serialNumber+")"}</span>
-						  	<input className="btn btn-danger btn-sm pull-right" type="button" value="修改文档"/>
+						  	<input onClick={this.onUpdateDoc.bind(this,this.props.doc.docId)} className="btn btn-danger btn-sm pull-right" type="button" value="修改文档"/>
 						  </div>
 						  <div className="panel-body" style={{padding:0}}>
 						    <pre style={{margin:0,border:"none",borderRadius:0}}>

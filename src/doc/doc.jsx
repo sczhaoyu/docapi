@@ -3,11 +3,13 @@ var post     = require('ajax').post;
 var LeftMenu=require('./left_menu.jsx');
 var DocInfo=require('./doc_info.jsx');
 var Immutable = require('immutable');
+var AddCatalogue=require('../add_catalogue/add_catalogue.jsx');
 var Doc = React.createClass({
    getInitialState:function () {
 		return {
 			catalogueId: 0,
 			doc:null,
+			updateDocId:0,
 			parameters:[]
 		}
 	},
@@ -81,12 +83,19 @@ var Doc = React.createClass({
 	  });
 			 
 	},
+	onUpdateDoc:function(docId){
+		this.setState({
+			updateDocId:docId
+		});
+	}, 
 	render:function(){
-
+        if (this.state.updateDocId>0) {
+			return <AddCatalogue updateDocId={this.state.updateDocId}/>;
+		}
      	return(
        		 <div>
 	            <div className="col-md-3"><LeftMenu loadDoc={this.renderDoc}/></div>
-	            <div className="col-md-9"><DocInfo onDeletePrm={this.onDeletePrm} onSubmitUpdate={this.onSubmitUpdate} doc={this.state.doc} parameters={this.state.parameters} /></div>
+	            <div className="col-md-9"><DocInfo onUpdateDoc={this.onUpdateDoc} onDeletePrm={this.onDeletePrm} onSubmitUpdate={this.onSubmitUpdate} doc={this.state.doc} parameters={this.state.parameters} /></div>
           	 </div>
    		 );
 

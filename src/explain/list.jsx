@@ -21,6 +21,7 @@ var  List = React.createClass({
 		            <td>张三</td>
 		            <td>
 		            	<div className="btn-group btn-group-sm" role="group" aria-label="Small button group">
+					      <button type="button" className="btn btn-default">查看</button>
 					      <button type="button" className="btn btn-default">修改</button>
 					      <button type="button" className="btn btn-default">删除</button>
 					    </div>

@@ -21,6 +21,41 @@ var AddCatalogue = React.createClass({
 			}
 		
 	},
+	componentDidMount: function () {
+		if (this.props.updateDocId!=undefined&&this.props.updateDocId>0) {
+		 	//加载文档信息
+		 	this.loadDoc(this.props.updateDocId);
+		}
+	},
+	//加载文档
+	loadDoc:function(docId){
+      	var that = this;
+      	var req=[];
+      	var rsp=[];
+      	var doc={};
+		post('/catalogue/doc', {docId:docId}, function (r) {
+			if (r.success) {
+			    if (r.jsonRet.parameters!=undefined&&r.jsonRet.parameters!=null) {
+			    	for (var i = 0; i < r.jsonRet.parameters.length; i++) {
+		      		  var p=r.jsonRet.parameters[i];
+				 	  if(p.prmType===0){
+					 	  req.push(p);
+				 	  }else{
+				 	  	  rsp.push(p);
+				 	  }
+					 	   
+				    }
+			    }
+                that.setState({
+					doc:r.jsonRet.doc,
+					reqParameters:req,
+					rspParameters:rsp
+				});
+			}
+			 
+	  });
+			 
+	},
 	//删除参数
 	onReqDeletePrm:function(idx,pid){
 	 var p = Immutable.List(this.state.reqParameters).delete(idx).toArray();
@@ -36,8 +71,6 @@ var AddCatalogue = React.createClass({
 	   });
 	},
 	submitDoc:function(){
-
-
        var d = Immutable.Map(this.state.parameter);
        d=d.set("doc", this.state.doc);
        d=d.set("reqParameters", this.state.reqParameters);
@@ -61,10 +94,15 @@ var AddCatalogue = React.createClass({
 	       	dialog("请选择文档的发布目录！");
 	       	return;
         }
+       var ts='提交成功！';
+       if (this.state.doc.docId>0) {
+       		ts='修改成功！';
+       }
        var j=JSON.stringify(d.toObject());
        post('/catalogue/submit', {"json":j}, function (r) {
 		if (r.success) {
-            dialog('提交成功！');
+			
+            dialog(ts);
 		}else{
 			dialog(r.msg);
 		}
@@ -117,10 +155,14 @@ var AddCatalogue = React.createClass({
 	render:function(){
  	return(
 		 	<div className="panel panel-default">
-			  <div className="panel-heading" style={{height:50,padding:"7px 10px"}}>新建文档<input onClick={this.submitDoc} className="btn btn-danger pull-right" type="submit" value="保存文档"/></div>
+			  <div className="panel-heading" style={{height:50,padding:"7px 10px"}}>{this.state.doc.docId>0&&"修改文档"||"新建文档"}
+			  	<input onClick={this.submitDoc} 
+			  		   className="btn btn-danger pull-right"
+			  		   type="submit" value={this.state.doc.docId>0&&"确认修改"||"保存文档"}/>
+			  </div>
 			  <div className="panel-body">
 		        <div className="col-md-5">
-		        	<DocInput doc={this.state.doc} onUpdateDoc={this.onUpdateDoc}/>
+		        	<DocInput doc={this.state.doc||""} onUpdateDoc={this.onUpdateDoc}/>
 		        </div>
 		        <div className="col-md-7"><Parameters onDeletePrm={this.onReqDeletePrm} docId={0} title={"请求参数"} onSubmitUpdate={this.onReqUpdate} cz={true}  parameters={this.state.reqParameters}/></div>
 		        <div className="col-md-7"><Parameters onDeletePrm={this.onRspDeletePrm} docId={0} title={"响应参数"} onSubmitUpdate={this.onRspUpdate} cz={true}  parameters={this.state.rspParameters}/></div>

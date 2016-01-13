@@ -10,7 +10,7 @@ var Explain=require('./explain/explain.jsx');
 var App = React.createClass({
 	getInitialState:function () {
 		return {
-			routerIdx:0
+			routerIdx:0,//路由
 		}	
 	},
 	onSetRouterIdx:function(idx){
