@@ -1,6 +1,61 @@
 var React= require("react");
+var PanleCode=require('../doc/panle_code.jsx');
 var  List = React.createClass({
+	getInitialState:function () {
+		return {
+			lookState: false,//是否查看文章
+			explain:{}
+
+		}
+	},
+	update:function(e){
+		this.props.update(e);
+	},
+	delete:function(eid){
+		this.props.delete(eid);
+	},
+	look:function(e){
+        this.setState({
+        	explain:e,
+        	lookState:true
+        });
+	},
+	renderRows:function(){
+		var ret =[];
+		for(var i=0;i<this.props.explains.length;i++){
+			var o=this.props.explains[i];
+			var date = new Date(o.createdAt);
+           date=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+			ret.push(
+			   <tr key={"explain_"+o.explainId}>
+		            <td>{date}</td>
+		            <td>{o.title}</td>
+		            <td>{o.userName}</td>
+		            <td>
+		            	<div className="btn-group btn-group-sm" role="group" aria-label="Small button group">
+					      <button onClick={this.look.bind(this,o)} type="button" className="btn btn-default">查看</button>
+					      <button onClick={this.update.bind(this,o)} type="button" className="btn btn-default">修改</button>
+					      <button onClick={this.delete.bind(this,o.explainId)} type="button" className="btn btn-default">删除</button>
+					    </div>
+		            </td>
+		          </tr>
+			);
+		}
+		return ret;
+	},
 	render:function(){
+	  if (this.state.lookState) {
+         return (<PanleCode  title={this.state.explain.userName+":"+this.state.explain.title} txt={this.state.explain.descriptionText}/>);
+	  };
+	  if (this.props.explains.length<=0) {
+          return(
+          	<div className="panel panel-default">
+			  <div className="panel-body">
+				  暂时没有内容
+			   </div> 
+			  </div> 
+          );
+	  }
       return (	
       	<div className="panel panel-default">
 		  <div className="panel-body">
@@ -14,45 +69,10 @@ var  List = React.createClass({
 		            <td className="col-md-2">操作</td>
 		          </tr>
 		        </thead>
-		        <tbody>
-		          <tr>
-		            <td>2015/10/15 13:40:35</td>
-		            <td>公共头说明</td>
-		            <td>张三</td>
-		            <td>
-		            	<div className="btn-group btn-group-sm" role="group" aria-label="Small button group">
-					      <button type="button" className="btn btn-default">查看</button>
-					      <button type="button" className="btn btn-default">修改</button>
-					      <button type="button" className="btn btn-default">删除</button>
-					    </div>
-		            </td>
-		          </tr>
-
-		        </tbody>
+		        <tbody>{this.renderRows()}</tbody>
 		      </table>
 		    </div> 
 		   </div> 
-		      <div className="panel-footer" style={{height:50,padding:"7px 15px"}}>
-			  		<nav className="pull-right" style={{padding:0,margin:0}}>
-					  <ul className="pagination" style={{padding:0,margin:0}}>
-					    <li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					    <li>
-					      <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-					</nav>
-			  </div>
 		  </div> 
 	  );	
 	}
