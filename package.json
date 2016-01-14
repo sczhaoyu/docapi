@@ -8,12 +8,11 @@
     "deploy": "node node_modules/webpack/bin/webpack.js"
   },
   "dependencies": {
-    "deploy": "^1.0.3",
     "jquery": "^2.2.0",
     "react-cropper": "^0.5.1",
-    "react-tap-event-plugin": "^0.2.1"
   },
   "devDependencies": {
+    "react-tap-event-plugin": "^0.2.1",
     "ajax": "0.0.4",
     "babel-loader": "^6.2.1",
     "css-loader": "^0.23.1",
