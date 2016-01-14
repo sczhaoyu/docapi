@@ -11,7 +11,7 @@ var DataType = React.createClass({
 		var ret =[];
 		for(var i=0;i<DT.length;i++){
 			ret.push(
-			  <tr>
+			  <tr key={"dt_"+i}>
 	            <th scope="row">{DT[i].name}</th>
 	            <td>{DT[i].txt}</td>
 	          </tr>

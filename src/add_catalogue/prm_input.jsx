@@ -58,8 +58,8 @@ var PrmInput = React.createClass({
 	},
 	render:function(){
       return (	
-		<div className="panel panel-default">
-		  <div className="panel-body">
+		<div className="panel panel-default" style={{marginBottom:0 }}>
+		  <div className="panel-body" style={{marginBottom:0 }}>
 		       <div className="input-group">
 				  <span className="input-group-addon">名称:</span>
 				  <input type="text" ref="name" name="name" onBlur={this.valueChanged} className="form-control" aria-label="Amount (to the nearest dollar)"/>

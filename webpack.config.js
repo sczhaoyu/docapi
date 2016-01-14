@@ -18,7 +18,7 @@ var less = {
     loader:"style-loader!css-loader!less-loader"
 };
 
-if(process.argv.length > 2 && process.argv[2] == 'deploy'){
+if(process.argv.length > 1 ){
     loaders.shift();
 
     entry.shift();

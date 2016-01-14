@@ -164,9 +164,17 @@ var AddCatalogue = React.createClass({
 		        <div className="col-md-5">
 		        	<DocInput doc={this.state.doc||""} onUpdateDoc={this.onUpdateDoc}/>
 		        </div>
-		        <div className="col-md-7"><Parameters onDeletePrm={this.onReqDeletePrm} docId={0} title={"请求参数"} onSubmitUpdate={this.onReqUpdate} cz={true}  parameters={this.state.reqParameters}/></div>
-		        <div className="col-md-7"><Parameters onDeletePrm={this.onRspDeletePrm} docId={0} title={"响应参数"} onSubmitUpdate={this.onRspUpdate} cz={true}  parameters={this.state.rspParameters}/></div>
-		     	<div className="col-md-7"><PrmInput onAddParameter={this.onAddParameter}/></div>
+
+		       <div className="panel panel-default col-md-7" style={{padding:0,marigin:0,border:"none"}}>
+				  <div className="panel-body" style={{padding:0,marigin:0,border:"none"}}>
+
+		        <Parameters onDeletePrm={this.onReqDeletePrm} docId={0} title={"请求参数"} onSubmitUpdate={this.onReqUpdate} cz={true}  parameters={this.state.reqParameters}/>
+		        <Parameters onDeletePrm={this.onRspDeletePrm} docId={0} title={"响应参数"} onSubmitUpdate={this.onRspUpdate} cz={true}  parameters={this.state.rspParameters}/>
+		     	<PrmInput onAddParameter={this.onAddParameter}/>
+
+		     	  </div>
+				</div>
+
 			  </div>
 			</div>
 		 );
