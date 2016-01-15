@@ -53,7 +53,7 @@ var Header = React.createClass({
                         <ul className="nav navbar-nav">
                           {this.renderRowsLink()}
                         </ul>
-                        <div className="navbar-form navbar-right" role="search">
+                        <div className="navbar-form navbar-left" role="search">
                             <div className="input-group">
                               <input type="text" className="form-control" placeholder="输入目录名称"/>
                               <span className="input-group-btn">
@@ -61,6 +61,7 @@ var Header = React.createClass({
                               </span>
                             </div> 
                         </div>
+                        <p style={{paddingLeft:10,marginRight:0}} className="navbar-text navbar-right"><span className="label label-success">{user.nickName}</span></p>
                       </div>
                     </div>
             </nav>

@@ -24,9 +24,10 @@ var Doc = React.createClass({
 			}
 		}
 		var j=JSON.stringify(prm);
+		var that=this;
 		post('/parameter/update', {"json":j}, function (r) {
 			if (r.success) {
-			 	this.setState({
+			 	that.setState({
 					parameters:p.toArray()
 				});
 			}else{

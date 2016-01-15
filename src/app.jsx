@@ -7,11 +7,18 @@ var UpdateLog=require('./update_log/update_log.jsx');
 var AddCatalogue=require('./add_catalogue/add_catalogue.jsx');
 var Version=require('./version/version.jsx');
 var Explain=require('./explain/explain.jsx');
+var Login=require('./login/login.jsx');
 var App = React.createClass({
 	getInitialState:function () {
 		return {
 			routerIdx:0,//路由
 		}	
+	},
+	onLogin:function(u){
+       user=u;
+       this.setState({
+        	routerIdx:-1
+       });
 	},
 	onSetRouterIdx:function(idx){
 		
@@ -20,7 +27,11 @@ var App = React.createClass({
         });
 	},
 	render:function(){
+	
     var plug=null;
+    if (user==null) {
+		return <Login onLogin={this.onLogin}/>;
+	}
 	switch(this.state.routerIdx)
 		{
 		case 1:

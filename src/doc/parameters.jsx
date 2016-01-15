@@ -18,6 +18,7 @@ var Parameters = React.createClass({
 		//通知外部数据被更改
 		var prm={};
 		var c=this.refs[idx];
+
 		var select=c.getElementsByTagName('select');
 		c=c.getElementsByTagName('input');
         
@@ -31,6 +32,9 @@ var Parameters = React.createClass({
 		}
 		prm["parameterId"]=pid;
 		prm["required"]=parseInt(prm["required"]);
+        if (this.props.docId>0) {
+        	prm["docId"]=parseInt(this.props.docId);
+        }
 		this.props.onSubmitUpdate(idx,prm);
 	},
 	getCz:function(){

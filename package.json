@@ -5,11 +5,11 @@
   "main": "src/main.jsx",
   "scripts": {
     "start": "node server.js",
-    "deploy": "node node_modules/webpack/bin/webpack.js"
+    "deploy": "node node_modules/webpack/bin/webpack.js deploy"
   },
   "dependencies": {
     "jquery": "^2.2.0",
-    "react-cropper": "^0.5.1",
+    "react-cropper": "^0.5.1"
   },
   "devDependencies": {
     "react-tap-event-plugin": "^0.2.1",
