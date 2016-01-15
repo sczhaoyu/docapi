@@ -12,7 +12,7 @@ var Link =[
 var Header = React.createClass({
     getInitialState:function () {
       return {
-        idx:0
+        idx:4
       }
     },
     renderRowsLink:function(){

@@ -54,7 +54,8 @@ var App = React.createClass({
 		  break;
 		default:
 		   //默认页面
-		   plug=<Doc loadDoc={this.renderDoc}/>;
+		   // plug=<Doc loadDoc={this.renderDoc}/>;
+		   plug=<UpdateLog/>
 	  }
       return (	
 			<div className="container-fluid">
