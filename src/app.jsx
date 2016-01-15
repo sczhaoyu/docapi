@@ -11,7 +11,7 @@ var Login=require('./login/login.jsx');
 var App = React.createClass({
 	getInitialState:function () {
 		return {
-			routerIdx:0,//路由
+			routerIdx:4,//路由
 		}	
 	},
 	onLogin:function(u){
@@ -34,28 +34,31 @@ var App = React.createClass({
 	}
 	switch(this.state.routerIdx)
 		{
+		case 0:
+			plug=<Doc loadDoc={this.renderDoc}/>;
+		break;
 		case 1:
-			plug=<AddCatalogue/>
+			plug=<AddCatalogue/>;
 		  break;
 		case 2:
-			plug=<DataType/>
+			plug=<DataType/>;
 		  break;
 		case 3:
-			plug=<ErrCode/>
+			plug=<ErrCode/>;
 		  break;
 		case 4:
-			plug=<UpdateLog/>
+			plug=<UpdateLog/>;
 			break;
 		case 5:
-			plug=<Explain/>
+			plug=<Explain/>;
 			break;
 		case 7:
-			plug=<Version/>
+			plug=<Version/>;
 		  break;
 		default:
 		   //默认页面
 		   // plug=<Doc loadDoc={this.renderDoc}/>;
-		   plug=<UpdateLog/>
+		   plug=<UpdateLog/>;
 	  }
       return (	
 			<div className="container-fluid">
