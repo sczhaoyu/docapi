@@ -24,7 +24,6 @@ var UpdateLog = React.createClass({
 		var ret =[];
 		for(var i=0;i<this.state.logs.length;i++){
 			var o=this.state.logs[i];
-			console.log(o.createdAt);
 			var date = new Date(o.createdAt);
             date=date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()+"  "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
 			ret.push(
