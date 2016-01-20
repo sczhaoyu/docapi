@@ -21,7 +21,8 @@ var ErrCode = React.createClass({
     //打开添加错误代码的窗口
 	openDialog:function(){
 		this.setState({
-			diaState:true
+			diaState:true,
+			errCode:{}
 		});
 	},
 	//掉起修改界面
@@ -51,6 +52,8 @@ var ErrCode = React.createClass({
         for(k in e){
         	c=c.set(k,e[k]);
         }
+        c=c.set("projectId",parseInt(pro.projectId));
+        c=c.set("versionId",parseInt(version.versionId));
         var that=this;
         var j=JSON.stringify(c.toObject());
         post('/err/code/save', {"json":j}, function (r) {
@@ -64,7 +67,7 @@ var ErrCode = React.createClass({
 	},
     loadErrCode:function(){
     	var that = this;
-		post('/err/code/all', {}, function (r) {
+		post('/err/code/all', {projectId:pro.projectId}, function (r) {
 			if (r.success) {
                that.setState({
 					errCodes: r.jsonRet

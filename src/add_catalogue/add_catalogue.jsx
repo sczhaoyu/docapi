@@ -72,7 +72,12 @@ var AddCatalogue = React.createClass({
 	},
 	submitDoc:function(){
        var d = Immutable.Map(this.state.parameter);
-       d=d.set("doc", this.state.doc);
+       var doc = Immutable.Map(this.state.doc);
+       var  pid=parseInt(pro.projectId);
+       var  vid= parseInt(version.versionId);
+       doc=doc.set("projectId",pid);
+       doc=doc.set("versionId",vid);
+       d=d.set("doc",doc.toObject());
        d=d.set("reqParameters", this.state.reqParameters);
        d=d.set("rspParameters", this.state.rspParameters);
        var o=d.toObject();

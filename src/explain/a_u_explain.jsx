@@ -19,7 +19,7 @@ var AUExplain = React.createClass({
 			  </div>
 			  <div className="form-group">
 			    <label>发布人</label>
-			    <input type="text" name="userName" ref="userName" className="form-control" defaultValue={this.props.explain.userName}  placeholder="输入发布人姓名"/>
+			    <input type="text" name="userName" ref="userName" className="form-control" defaultValue={user.nickName} readOnly="disabled"/>
 			  </div>
 			  <div className="form-group">
 			    <label>内容</label>

@@ -46,7 +46,7 @@ var Header = React.createClass({
                           <span className="icon-bar"></span>
                           <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand">惠居API</a>
+                        <a className="navbar-brand">{pro.name}<span className="badge">{version.version}</span></a>
                       </div>
                      
                       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
@@ -61,7 +61,10 @@ var Header = React.createClass({
                               </span>
                             </div> 
                         </div>
-                        <p style={{paddingLeft:10,marginRight:0}} className="navbar-text navbar-right"><span className="label label-success">{user.nickName}</span></p>
+                        <p style={{paddingLeft:10,marginRight:0}} className="navbar-text navbar-right">
+                        <span className="label label-success">{user.nickName}</span>
+
+                        </p>
                       </div>
                     </div>
             </nav>

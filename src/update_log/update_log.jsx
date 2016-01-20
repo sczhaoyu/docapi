@@ -11,7 +11,7 @@ var UpdateLog = React.createClass({
 	},
 	loadLogs:function(){
 		var that=this;
-    	post('/update/log/find', {}, function (r) {
+    	post('/update/log/find', {projectId:pro.projectId}, function (r) {
 			if (r.success) {
                that.setState({
                	   logs:r.jsonRet

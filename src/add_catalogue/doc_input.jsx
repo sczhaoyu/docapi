@@ -15,7 +15,7 @@ var DocInput = React.createClass({
 	//请求加载目录
 	loadCatalogue:function() {
 		var that = this;
-		post('/catalogue/all', {}, function (r) {
+		post('/catalogue/all', {projectId:pro.projectId,versionId:version.versionId}, function (r) {
 			if (r.success) {
                that.setState({
 					catalogues: r.jsonRet

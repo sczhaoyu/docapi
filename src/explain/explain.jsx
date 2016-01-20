@@ -47,6 +47,8 @@ var Explain = React.createClass({
         for(k in e){
         	c=c.set(k,e[k]);
         }
+        c=c.set("projectId",parseInt(pro.projectId));
+        c=c.set("versionId",parseInt(version.versionId));
         var that=this;
         var j=JSON.stringify(c.toObject());
 		post('/explain/submit', {"json":j}, function (r) {

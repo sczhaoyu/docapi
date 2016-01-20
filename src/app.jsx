@@ -8,10 +8,13 @@ var AddCatalogue=require('./add_catalogue/add_catalogue.jsx');
 var Version=require('./version/version.jsx');
 var Explain=require('./explain/explain.jsx');
 var Login=require('./login/login.jsx');
+var Project=require('./project/project.jsx');
 var App = React.createClass({
 	getInitialState:function () {
 		return {
 			routerIdx:4,//路由
+			projectId:0,//所属项目
+			versionId:0,//所属版本
 		}	
 	},
 	onLogin:function(u){
@@ -19,6 +22,13 @@ var App = React.createClass({
        this.setState({
         	routerIdx:-1
        });
+	},
+	//切换版本和项目
+	selectVersion:function(pid,v){
+       this.setState({
+        	projectId:pid,
+        	versionId:v
+        });
 	},
 	onSetRouterIdx:function(idx){
 		
@@ -31,6 +41,9 @@ var App = React.createClass({
     var plug=null;
     if (user==null) {
 		return <Login onLogin={this.onLogin}/>;
+	}
+	if (this.state.projectId==0||this.state.version==0) {
+       return <Project selectVersion={this.selectVersion}/>;
 	}
 	switch(this.state.routerIdx)
 		{

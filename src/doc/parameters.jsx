@@ -32,6 +32,8 @@ var Parameters = React.createClass({
 		}
 		prm["parameterId"]=pid;
 		prm["required"]=parseInt(prm["required"]);
+		prm["projectId"]=parseInt(pro.projectId);
+		prm["versionId"]=parseInt(version.versionId);
         if (this.props.docId>0) {
         	prm["docId"]=parseInt(this.props.docId);
         }
