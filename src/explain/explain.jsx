@@ -67,8 +67,9 @@ var Explain = React.createClass({
       });
     },
     loadExplains:function(){
+
     	var that = this;
-		post('/explain/find', {}, function (r) {
+		  post('/explain/find', {projectId:pro.projectId,versionId:version.versionId}, function (r) {
 			if (r.success) {
                that.setState({
 					explains: r.jsonRet
