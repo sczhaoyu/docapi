@@ -2,12 +2,28 @@ var React   = require("react");
 var post     = require('ajax').post;
 var PanleCode=require('./panle_code.jsx');
 var Parameters=require('./parameters.jsx');
+var DiaLog=require('../dialog/dialog.jsx');
+var CopyDoc=require('./copy_doc.jsx');
 var DocInfo = React.createClass({
 		getInitialState:function () {
 			return {
 				updateDocId:0,//修改的ID
 				parameters:[],
+				dialogState:false//文档复制界面
 			}
+		},
+		//弹出框关闭事件
+		dialogToggle:function(){
+	      this.setState({
+	      	dialogState:!this.state.dialogState
+	      });
+		},
+		showCopyDialog:function(){
+		   var CopyDialog=null;
+		   if (this.state.dialogState) {
+		    CopyDialog=<DiaLog style={{title:"复制文档",width:436,height:270}} close={this.dialogToggle}  div={<CopyDoc/>} />
+		   }
+         return CopyDialog;
 		},
 		//渲染请求参数
 		renderParameters:function(t,title){
@@ -47,11 +63,12 @@ var DocInfo = React.createClass({
         }; 	
         return(
         	<div>
-        		   
+					{this.showCopyDialog()}
         		    <div className="panel panel-default">
 						  <div className="panel-heading" style={{lineHeight:"30px",height:48,backgroundImage:"none",padding:"8px 10px"}}>
 						  	<span>{this.props.doc.name+"("+this.props.doc.serialNumber+")"}</span>
 						  	<input onClick={this.onUpdateDoc.bind(this,this.props.doc.docId)} className="btn btn-danger btn-sm pull-right" type="button" value="修改文档"/>
+						  	<input style={{marginRight:10}} onClick={this.dialogToggle} className="btn btn-danger btn-sm pull-right" type="button" value="复制文档"/>
 						  </div>
 						  <div className="panel-body" style={{padding:0}}>
 						    <pre style={{margin:0,border:"none",borderRadius:0}}>

@@ -2,10 +2,12 @@ var React= require("react");
 var post 	= require('ajax').post;
 var  List = React.createClass({
 	cloneVersion:function(){
+        loading('克隆版本中，请稍后');
 		var oldVersionId=this.refs.oldVersionId.value;
 		var newVersionId=this.refs.newVersionId.value;
 		post('/project/version/clone', {projectId:pro.projectId,oldVersionId:oldVersionId,newVersionId:newVersionId}, function (r) {
 			if (r.success) {
+			    loadingClose();
                 dialog("克隆成功");
 			}else{
 				dialog(r.msg);

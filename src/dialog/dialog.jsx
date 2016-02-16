@@ -14,27 +14,31 @@ var  DiaLog = React.createClass({
         	style[s]=this.props.style[s];
         	}
 		}
+		style.top=Math.floor((document.documentElement.clientHeight-style.height)/2);
+		if (style.top<0) {
+			style.top=0;
+		}
+        style.left=Math.floor((document.documentElement.clientWidth-style.width)/2);
+        if (style.left<0) {
+			style.left=0;
+		}
         return style;
 	},
 	//默认样式
 	defaultStyle:function(){
 		var style={};
-		style.title="信息";
 		style.width=500;
 		style.height=320;
 		style.zIndex=19891038;
-		style.top=(document.body.scrollHeight-style.height)/2;
-		if (style.top<0) {
-			style.top=0;
-		}
-        style.left=(document.body.scrollWidth-style.width)/2;
-        if (style.left<0) {
-			style.left=0;
-		}
 		return style;
 	},
 	getTitle:function(){
-		var title=this.getStyle().title;
+		var title="信息";
+		if (this.props.style!=undefined) {
+			 if (this.props.style.title!=undefined) {
+                title=this.props.style.title;
+			 }
+		}
 		if (!title) {
 			return null;
 		}
