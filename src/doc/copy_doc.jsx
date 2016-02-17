@@ -25,6 +25,7 @@ var CopyDoc = React.createClass({
 			   loadingClose();
                dialog("复制成功！");
                that.props.dialogToggle();
+               that.props.flush();
 			}else{
 			  loadingClose();
 			  dialog(r.msg);

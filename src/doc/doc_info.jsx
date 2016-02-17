@@ -8,7 +8,7 @@ var DocInfo = React.createClass({
 		getInitialState:function () {
 			return {
 				updateDocId:0,//修改的ID
-				parameters:[],
+				parameters:[],//参数
 				dialogState:false//文档复制界面
 			}
 		},
@@ -33,7 +33,7 @@ var DocInfo = React.createClass({
 		showCopyDialog:function(){
 		   var CopyDialog=null;
 		   if (this.state.dialogState) {
-		    CopyDialog=<DiaLog style={{title:"复制文档",width:436,height:270}} close={this.dialogToggle}  div={<CopyDoc dialogToggle={this.dialogToggle} doc={this.props.doc}/>} />
+		    CopyDialog=<DiaLog style={{title:"复制文档",width:436,height:270}} close={this.dialogToggle}  div={<CopyDoc flush={this.props.flush} dialogToggle={this.dialogToggle} doc={this.props.doc}/>} />
 		   }
          return CopyDialog;
 		},

@@ -7,18 +7,29 @@ var AddCatalogue=require('../add_catalogue/add_catalogue.jsx');
 var Doc = React.createClass({
    getInitialState:function () {
 		return {
-			catalogueId: 0,
-			doc:null,
-			updateDocId:0,
+			doc:null,//文档信息
+			updateDocId:0,//更新的文档
+			catalogues:[],//目录
+			docs:[],//目录下的文档
+			catalogue:{},//选中的目录
 			parameters:[] 
 			 
 		}
 	},
+	componentDidMount: function () {
+	    this.loadCatalogue();
+	},
 	flush:function(){
-        this.setState({
-			doc:null,
-			parameters:[],
-        });
+		var that=this;
+		post('/catalogue/find/doc',{catalogueId:this.state.catalogue.catalogueId}, function (r) {
+		 if (r.success) {
+            that.setState({
+        	  docs:r.jsonRet,
+        	  doc:null,
+			  parameters:[],
+	        });
+		 } 
+	   });
 	},
 	onSubmitUpdate:function(idx,prm){	
        var p=Immutable.List(this.state.parameters);
@@ -91,6 +102,37 @@ var Doc = React.createClass({
 	  });
 			 
 	},
+	//选中目录
+	changeCatalogue:function(cid){
+	   var c={};
+	   for (var i =0; i<this.state.catalogues.length; i++) {
+	       if (cid===this.state.catalogues[i].catalogueId) {
+  				c=this.state.catalogues[i];
+	       }
+	   } 
+	   var that=this;
+ 	   post('/catalogue/find/doc',{catalogueId:cid}, function (r) {
+		 if (r.success) {
+            that.setState({
+        	  catalogue:c,
+        	  docs:r.jsonRet
+	        });
+		 } 
+	   });
+	},
+	//请求加载全部目录
+	loadCatalogue:function() {
+		var that = this;
+		var docs=[];
+		post('/catalogue/all', {projectId:pro.projectId,versionId:version.versionId}, function (r) {
+		   if (r.success) {
+				that.setState({
+					catalogues:r.jsonRet,
+					docs:docs
+				});
+		   }
+		});
+	},
 	onUpdateDoc:function(docId){
 		this.setState({
 			updateDocId:docId
@@ -100,9 +142,11 @@ var Doc = React.createClass({
         if (this.state.updateDocId>0) {
 			return <AddCatalogue updateDocId={this.state.updateDocId}/>;
 		}
+
      	return(
        		 <div>
-	            <div className="col-md-3"><LeftMenu loadDoc={this.renderDoc}/></div>
+       		   
+	            <div className="col-md-3"><LeftMenu docs={this.state.docs} changeCatalogue={this.changeCatalogue} catalogue={this.state.catalogue} catalogues={this.state.catalogues} loadDoc={this.renderDoc}/></div>
 	            <div className="col-md-9"><DocInfo  flush={this.flush} onUpdateDoc={this.onUpdateDoc} onDeletePrm={this.onDeletePrm} onSubmitUpdate={this.onSubmitUpdate} doc={this.state.doc} parameters={this.state.parameters} /></div>
           	 </div>
    		 );
