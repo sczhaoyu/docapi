@@ -10,8 +10,15 @@ var Doc = React.createClass({
 			catalogueId: 0,
 			doc:null,
 			updateDocId:0,
-			parameters:[]
+			parameters:[] 
+			 
 		}
+	},
+	flush:function(){
+        this.setState({
+			doc:null,
+			parameters:[],
+        });
 	},
 	onSubmitUpdate:function(idx,prm){	
        var p=Immutable.List(this.state.parameters);
@@ -96,7 +103,7 @@ var Doc = React.createClass({
      	return(
        		 <div>
 	            <div className="col-md-3"><LeftMenu loadDoc={this.renderDoc}/></div>
-	            <div className="col-md-9"><DocInfo onUpdateDoc={this.onUpdateDoc} onDeletePrm={this.onDeletePrm} onSubmitUpdate={this.onSubmitUpdate} doc={this.state.doc} parameters={this.state.parameters} /></div>
+	            <div className="col-md-9"><DocInfo  flush={this.flush} onUpdateDoc={this.onUpdateDoc} onDeletePrm={this.onDeletePrm} onSubmitUpdate={this.onSubmitUpdate} doc={this.state.doc} parameters={this.state.parameters} /></div>
           	 </div>
    		 );
 

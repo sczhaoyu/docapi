@@ -1,6 +1,6 @@
 var React= require("react");
 var parent={
-	zIndex:19891022,
+	zIndex:19891014,
 	backgroundColor:"#000",
 	opacity:0.3,
 	filter:"alpha(opacity=30)"
@@ -29,7 +29,7 @@ var  DiaLog = React.createClass({
 		var style={};
 		style.width=500;
 		style.height=320;
-		style.zIndex=19891038;
+		style.zIndex=19891015;
 		return style;
 	},
 	getTitle:function(){

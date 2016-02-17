@@ -18,10 +18,22 @@ var DocInfo = React.createClass({
 	      	dialogState:!this.state.dialogState
 	      });
 		},
+		delDoc:function(){
+			var that=this;
+			post('/catalogue/doc/delete', {docId:this.props.doc.docId}, function (r) {
+				if (r.success) {
+					dialog("删除成功！");
+                    that.props.flush();
+				}else{
+					dialog(r.msg);
+				}
+				 
+			});
+		},
 		showCopyDialog:function(){
 		   var CopyDialog=null;
 		   if (this.state.dialogState) {
-		    CopyDialog=<DiaLog style={{title:"复制文档",width:436,height:270}} close={this.dialogToggle}  div={<CopyDoc/>} />
+		    CopyDialog=<DiaLog style={{title:"复制文档",width:436,height:270}} close={this.dialogToggle}  div={<CopyDoc dialogToggle={this.dialogToggle} doc={this.props.doc}/>} />
 		   }
          return CopyDialog;
 		},
@@ -56,7 +68,7 @@ var DocInfo = React.createClass({
         	return(
                   <div className="panel panel-default">
 					  <div className="panel-body">
-					    暂无文档信息！
+					     请选择左边菜单中你要查看的文档
 					  </div>
 					</div>
         		);
@@ -69,6 +81,7 @@ var DocInfo = React.createClass({
 						  	<span>{this.props.doc.name+"("+this.props.doc.serialNumber+")"}</span>
 						  	<input onClick={this.onUpdateDoc.bind(this,this.props.doc.docId)} className="btn btn-danger btn-sm pull-right" type="button" value="修改文档"/>
 						  	<input style={{marginRight:10}} onClick={this.dialogToggle} className="btn btn-danger btn-sm pull-right" type="button" value="复制文档"/>
+						  	<input style={{marginRight:10}} onClick={this.delDoc} className="btn btn-danger btn-sm pull-right" type="button" value="删除文档"/>
 						  </div>
 						  <div className="panel-body" style={{padding:0}}>
 						    <pre style={{margin:0,border:"none",borderRadius:0}}>

@@ -10,6 +10,7 @@ var  List = React.createClass({
 			    loadingClose();
                 dialog("克隆成功");
 			}else{
+				loadingClose();
 				dialog(r.msg);
 			}
 			

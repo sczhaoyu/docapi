@@ -48,7 +48,7 @@ var App = React.createClass({
 	switch(this.state.routerIdx)
 		{
 		case 0:
-			plug=<Doc loadDoc={this.renderDoc}/>;
+			plug=<Doc/>;
 		break;
 		case 1:
 			plug=<AddCatalogue/>;
