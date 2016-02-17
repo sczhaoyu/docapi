@@ -117,6 +117,8 @@ var Doc = React.createClass({
         	  catalogue:c,
         	  docs:r.jsonRet
 	        });
+		 }else{
+		 	dialog("该目录暂无文档！");
 		 } 
 	   });
 	},
