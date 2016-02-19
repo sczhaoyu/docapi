@@ -10,19 +10,12 @@ var  MuLu = React.createClass({
 			   that.refs.serialNumber.value="";
 			   that.refs.name.value="";
                dialog("目录添加成功！");
+               that.props.loadCatalogue();
 			}else{
 				dialog(r.msg);
 			}
 			
 	  });
-	},
-	renderRows:function(){
-      var ret=[];
-      for (var i = 0; i<this.props.version.length; i++) {
-      	 var v=this.props.version[i];
-         ret.push(<option value={v.versionId} key={"version_"+v.versionId}>{v.version}</option>);
-      }
-      return ret;
 	},
 	render:function(){
       return (	

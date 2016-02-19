@@ -6,7 +6,7 @@ var Link =[
     {name:"错误代码",idx:3},
     {name:"更新日志",idx:4},
     {name:"文档说明",idx:5},
-    {name:"版本管理",idx:7}
+    {name:"系统管理",idx:7}
 
 ]
 var Header = React.createClass({

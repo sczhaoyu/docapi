@@ -5,7 +5,7 @@ var ErrCode=require('./err_code/err_code.jsx');
 var DataType=require('./data_type/data_type.jsx');
 var UpdateLog=require('./update_log/update_log.jsx');
 var AddCatalogue=require('./add_catalogue/add_catalogue.jsx');
-var Version=require('./version/version.jsx');
+var Manager=require('./manager/manager.jsx');
 var Explain=require('./explain/explain.jsx');
 var Login=require('./login/login.jsx');
 var Project=require('./project/project.jsx');
@@ -66,7 +66,7 @@ var App = React.createClass({
 			plug=<Explain/>;
 			break;
 		case 7:
-			plug=<Version/>;
+			plug=<Manager/>;
 		  break;
 		default:
 		   //默认页面
