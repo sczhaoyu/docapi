@@ -10,12 +10,7 @@ var entry = [
 
 var plugins = [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: '"production"'
-    }
-  })
+    new webpack.NoErrorsPlugin()
 ];
 
 var less = {
@@ -32,7 +27,13 @@ if(process.argv.length > 2 && process.argv[2] == 'deploy'){
     less.loader = ExtractTextPlugin.extract("style-loader", "css-loader!less-loader");
     plugins = [new ExtractTextPlugin("bundle.css"),
                new webpack.optimize.UglifyJsPlugin(),
-               new webpack.optimize.DedupePlugin()];
+               new webpack.optimize.DedupePlugin(),
+               new webpack.DefinePlugin({
+                    'process.env': {
+                      NODE_ENV: '"production"'
+                    }
+                  })
+               ];
 }
 
 module.exports = {
