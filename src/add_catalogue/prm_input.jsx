@@ -70,6 +70,7 @@ var PrmInput = React.createClass({
 					  <option>float</option>
 					  <option>object</option>
 					  <option>arrary</option>
+					  <option>time</option>
 				  </select>
 				  <span className="input-group-addon">长度:</span>
 				  <input type="text" className="form-control" ref="length" name="length" onBlur={this.valueChanged}/>
